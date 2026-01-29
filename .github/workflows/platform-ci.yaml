@@ -1,0 +1,38 @@
+name: "Platform Governance & CI"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  governance:
+    name: "Checks & Balances"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 1. Terraform Security Scan (The "Manager" move)
+      - name: Checkov Security Scan
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/
+          framework: terraform
+          soft_fail: true # In a real dev environment, we'd set this to false to block bad code
+
+      # 2. Terraform Format & Validate
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+        working-directory: ./terraform
+
+      # 3. Documentation Linting
+      - name: Lint Markdown Files
+        uses: davidanson/markdownlint-cli2-action@v1
+        with:
+          globs: "**/*.md"
