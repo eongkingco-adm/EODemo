@@ -20,16 +20,3 @@ No service is permitted to migrate unless it meets the following "Definition of 
 
 ## 4. Rollback Plan
 In the event of a critical failure (Latency >500ms or 5xx error spikes), traffic is rerouted back to the On-Prem cluster via Cloud DNS weight adjustments. Target Recovery Time Objective (RTO): **< 5 minutes.**
-
-
-gantt
-    title GKE Migration Roadmap
-    dateFormat  YYYY-MM-DD
-    section Foundation
-    Shared VPC & IAM          :a1, 2026-01-01, 30d
-    Interconnect Setup        :after a1, 20d
-    section Migration
-    Pilot (Tier 3)            :2026-02-15, 20d
-    Production (Tier 1 & 2)   :2026-03-10, 45d
-    section Optimization
-    Post-Migration Cleanup    :2026-05-01, 15d

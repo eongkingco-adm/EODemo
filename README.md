@@ -28,4 +28,14 @@ graph LR
     E --> F
 
 
-    
+gantt
+    title GKE Migration Roadmap
+    dateFormat  YYYY-MM-DD
+    section Foundation
+    Shared VPC & IAM          :a1, 2026-01-01, 30d
+    Interconnect Setup        :after a1, 20d
+    section Migration
+    Pilot (Tier 3)            :2026-02-15, 20d
+    Production (Tier 1 & 2)   :2026-03-10, 45d
+    section Optimization
+    Post-Migration Cleanup    :2026-05-01, 15d
